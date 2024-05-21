@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Template Editor</title>
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/grapesjs"></script>
+
+    <!-- Load basic blocks plugin for additional components -->
+    <script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+    <script src="https://unpkg.com/grapesjs-plugin-forms"></script>
+</head>
+<body>
+
+<div id="gjs"></div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var editor = grapesjs.init({
+            container: '#gjs',
+            fromElement: true,
+            height: '100vh',
+            width: 'auto',
+            storageManager: false,
+            plugins: ['gjs-blocks-basic', 'grapesjs-plugin-forms'],
+            pluginsOpts: {
+                'gjs-blocks-basic': {},
+                'grapesjs-plugin-forms': {
+                    // Plugin options can be added here
+                }
+            },
+            styleManager: {
+                sectors: [
+                    {
+                        name: 'General',
+                        open: false,
+                        buildProps: ['float', 'display', 'position', 'top', 'right', 'bottom', 'left', 'z-index'],
+                    },
+                    {
+                        name: 'Dimension',
+                        open: false,
+                        buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
+                    },
+                    {
+                        name: 'Typography',
+                        open: false,
+                        buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-decoration'],
+                    },
+                    {
+                        name: 'Decorations',
+                        open: false,
+                        buildProps: ['opacity', 'border-radius', 'border', 'box-shadow', 'background-color', 'background'],
+                    },
+                    {
+                        name: 'Extra',
+                        open: false,
+                        buildProps: ['transition', 'perspective', 'transform'],
+                    },
+                    {
+                        name: 'Flex',
+                        open: false,
+                        buildProps: ['display', 'flex-direction', 'flex-wrap', 'justify-content', 'align-items', 'align-content', 'order', 'flex-basis', 'flex-grow', 'flex-shrink'],
+                        properties: [
+                            {
+                                name: 'Display', property: 'display', type: 'select', defaults: 'block', options: [
+                                    {value: 'block', name: 'Block'},
+                                    {value: 'flex', name: 'Flex'},
+                                    {value: 'inline', name: 'Inline'},
+                                    {value: 'inline-block', name: 'Inline Block'}
+                                ]
+                            },
+                            {property: 'flex-direction', type: 'select'},
+                            {property: 'flex-wrap', type: 'select'},
+                            {property: 'justify-content', type: 'select'},
+                            {property: 'align-items', type: 'select'},
+                            {property: 'align-content', type: 'select'},
+                            {property: 'order', type: 'integer'},
+                            {property: 'flex-basis', type: 'integer'},
+                            {property: 'flex-grow', type: 'integer'},
+                            {property: 'flex-shrink', type: 'integer'},
+                        ]
+                    }
+                ]
+            },
+        });
+    })
+</script>
+
+</body>
+</html>
