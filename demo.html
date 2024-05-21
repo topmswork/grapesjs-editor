@@ -94,6 +94,18 @@
                 editor.setComponents(components);
                 editor.setStyle(style);
 
+                // Function to customize toolbar for a component
+                function customizeToolbar(component) {
+                    const toolbar = component.get('toolbar');
+                    const newToolbar = toolbar.filter(item => item.command !== 'tlb-delete');
+                    component.set('toolbar', newToolbar);
+
+                    // Recursively apply toolbar customization to all children
+                    component.components().forEach(child => {
+                        customizeToolbar(child);
+                    });
+                }
+
                 // Function to set properties for a component and its children
                 function setComponentProperties(component) {
                     component.set({
@@ -102,6 +114,8 @@
                         copyable: false,
                         stylable: true,
                     });
+
+                    customizeToolbar(component); // Customize the toolbar
 
                     // Recursively apply properties to all children
                     component.components().forEach(child => {
