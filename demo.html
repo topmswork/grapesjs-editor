@@ -85,6 +85,42 @@
                 ]
             },
         });
+
+        const components = ``;
+        const style = ``;
+        
+        editor.on('load',
+            function () {
+                editor.setComponents(components);
+                editor.setStyle(style);
+
+                // Function to set properties for a component and its children
+                function setComponentProperties(component) {
+                    component.set({
+                        removable: false,
+                        draggable: false,
+                        copyable: false,
+                        stylable: true,
+                    });
+
+                    // Recursively apply properties to all children
+                    component.components().forEach(child => {
+                        setComponentProperties(child);
+                    });
+                }
+
+                // Find and modify the header component
+                var headerComponent = editor.getWrapper().find('header')[0];
+                if (headerComponent) {
+                    setComponentProperties(headerComponent);
+                }
+
+                // Find and modify the footer component
+                var footerComponent = editor.getWrapper().find('footer')[0];
+                if (footerComponent) {
+                    setComponentProperties(footerComponent);
+                }
+            });
     })
 </script>
 
